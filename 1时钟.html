@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		#clock{
+			width: 300px;
+			height: 300px;
+			position: relative;
+			margin: 50px auto;
+			border: 2px solid #000;
+			border-radius: 50%;
+			background: url(1.jpg) 100% 100%;
+		}
+
+		#scale li{
+			width: 4px;
+			height: 4px;
+			background: #000;
+			position: absolute;
+			left: 148px;
+			top: 0;
+			-webkit-transform-origin: center 150px;
+		}
+		#scale li:nth-child(5n+1){
+			height: 8px;
+			width: 6px;
+			position: absolute;
+			left: 147px;
+		}
+		#hour{
+			width: 6px;
+			height: 60px;
+			background: #000;
+			position: absolute;
+			left: 147px;
+			top: 95px;
+			-webkit-transform-origin: center 55px;
+		}
+		#minute{
+			width: 4px;
+			height: 70px;
+			background: #333;
+			position: absolute;
+			left: 148px;
+			top: 85px;
+			-webkit-transform-origin: center 65px;
+		}
+		#second{
+			width: 2px;
+			height: 90px;
+			background: #f00;
+			position: absolute;
+			left: 149px;
+			top: 70px;
+			-webkit-transform-origin: center 80px;
+		}
+		#jiaodian{
+			width: 8px;
+			height: 8px;
+			background: #f00;
+			border-radius: 50%;
+			position: absolute;
+			left: 146px;
+			top: 146px;
+		}
+		h2{
+			font-size: 20px;
+			position: absolute;
+			left: 136px;
+			top: 10px;
+		}
+		#num h2:nth-child(2){
+			left: 210px;
+			top: 25px;
+		}
+		#num h2:nth-child(3){
+			left: 258px;
+			top: 70px;
+		}
+		#num h2:nth-child(4){
+			left: 272px;
+			top: 134px;
+		}
+		#num h2:nth-child(5){
+			left: 258px;
+			top: 210px;
+		}
+		#num h2:nth-child(6){
+			left: 210px;
+			top: 255px;
+		}
+		#num h2:nth-child(7){
+			left: 143px;
+			top: 260px;
+		}
+		#num h2:nth-child(8){
+			left: 80px;
+			top: 255px;
+		}
+		#num h2:nth-child(9){
+			left: 32px;
+			top: 210px;
+		}
+		#num h2:nth-child(10){
+			left: 12px;
+			top: 130px;
+		}
+		#num h2:nth-child(11){
+			left: 30px;
+			top: 70px;
+		}
+		#num h2:nth-child(12){
+			left: 78px;
+			top: 25px;
+		}
+		#num h2:nth-child(3n+1){
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="clock">
+		<div id="hour"></div>
+		<div id="minute"></div>
+		<div id="second"></div>
+		<ul id="scale">
+		</ul>
+		<div id="jiaodian"></div>
+		<div id="num">
+			<h2>12</h2>
+			<h2>1</h2>
+			<h2>2</h2>
+			<h2>3</h2>
+			<h2>4</h2>
+			<h2>5</h2>
+			<h2>6</h2>
+			<h2>7</h2>
+			<h2>8</h2>
+			<h2>9</h2>
+			<h2>10</h2>
+			<h2>11</h2>
+		</div>
+		
+	</div>
+	<script src='jquery-1.12.4.js'></script>
+	<script>
+		$(function(){
+			var date,hour,minute,second;
+			var html='',num='';
+			for(var i=0;i<60;i++){
+				html += "<li style='-webkit-transform:rotate("+i*6+"deg)'></li>";
+			}
+			$('#scale').html(html);
+
+			function timer(){
+					date = new Date();
+					second = date.getSeconds();
+					minute = date.getMinutes()+1/second;
+					hour = date.getHours()+1/minute;
+					$('#second').css('-webkit-transform','rotate('+second*6+'deg)');
+					$('#minute').css('-webkit-transform','rotate('+minute*6+'deg)');
+					$('#hour').css('-webkit-transform','rotate('+hour*30+'deg)');	
+			} 
+			timer();
+			setInterval(timer,1000);
+		});
+	</script>
+</body>
+</html>
