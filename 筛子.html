@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>骰子</title>
+	<style>
+		body{
+			background: #000;
+			-webkit-perspective: 10000px;
+			-webkit-perspective-origin: top;
+		}
+		#box{
+			position: relative;
+			width: 200px;
+			height: 200px;
+			margin: 100px auto;
+			-webkit-transform-style: preserve-3d;
+			-webkit-animation: xxx 2s linear infinite;
+		}
+		@-webkit-keyframes xxx{
+			from{
+
+				}to{
+					
+					-webkit-transform: rotate3d(45,45,135,360deg);
+				}
+		}
+		#box div{
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			background: #fff;
+			opacity: 0.6;
+			font-size: 40px;
+			line-height: 200px;
+			text-align: center;
+			border-radius: 10px;
+		}
+		#box div:nth-child(6){
+			-webkit-transform: rotateX(90deg) scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		#box div:nth-child(1){
+			-webkit-transform: rotateX(-90deg)  scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		#box div:nth-child(3){
+			-webkit-transform: rotateY(90deg) scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		#box div:nth-child(5){
+			-webkit-transform: rotateY(-90deg) scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+		#box div:nth-child(2){
+			-webkit-transform: scale3d(1.2,1.2,1.2) translateZ(100px)  ;
+		}
+		#box div:nth-child(4){
+			-webkit-transform: rotateY(180deg) scale3d(1.2,1.2,1.2) translateZ(100px);
+		}
+
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+	</div>
+		
+</body>
+</html>

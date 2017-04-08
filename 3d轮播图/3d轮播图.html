@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d轮播图</title>
+	<style>
+		#imgs{
+			width: 680px;
+			height: 344px;
+			position: relative;
+			margin: 100px auto;
+			-webkit-perspective: 1000px;
+		}
+		img{
+			position: absolute;
+			left: 0;
+			top: 0;
+			opacity: 0;
+			-webkit-transform-origin: bottom;
+		}
+		span{
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			border-radius: 50%;
+			background: #ccc;
+			color: #fff;
+			-webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+			-webkit-text-stroke: 4px #000;
+		}
+		#prev{
+			font-size: 40px;
+			position: absolute;
+			left: -100px;
+			top: 120px;
+		}
+		#next{
+			font-size: 40px;
+			position: absolute;
+			right: -100px;
+			top: 120px;
+		}
+		.show{
+			-webkit-animation: show 1s ease forwards;
+		}
+		@-webkit-keyframes show{
+			from{
+				opacity: 0;
+				-webkit-transform: rotateX(180deg);
+			}
+			to{
+				opacity: 1;
+				-webkit-transform: rotateX(0deg);
+			}
+		}
+		.hide{
+			-webkit-animation: hide 1s ease forwards;
+		}
+		@-webkit-keyframes hide{
+			from{
+				opacity: 1;
+				-webkit-transform: rotateX(0deg);
+			}
+			to{
+				opacity: 0;
+				-webkit-transform: rotateX(-180deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="imgs">
+			<img src="img/1.jpg" alt="" class="show">
+			<img src="img/2.jpg" alt="">
+			<img src="img/3.jpg" alt="">
+			<img src="img/4.jpg" alt="">
+			<span id="prev">&lt;</span>
+			<span id="next">&gt;</span>
+		</div>	
+	</div>
+	<script src='../jquery-1.12.4.js'></script>
+	<script>
+		$(function(){
+			var indx=0;
+
+			$('#next').on('click',function(){				
+				$('img').eq(indx).removeClass().addClass('hide');
+				indx++;
+				if(indx==$('img').size()){
+					indx=0;
+				}
+				$('img').eq(indx).removeClass().addClass('show');
+			});
+			$('#prev').on('click',function(){
+				$('img').eq(indx).removeClass().addClass('hide');
+				if(indx==0){
+					indx=$('img').size();
+				}
+				
+				indx--;
+				$('img').eq(indx).removeClass().addClass('show');
+			});
+		});	
+	</script>
+</body>
+</html>

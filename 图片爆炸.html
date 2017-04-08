@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爆炸照片墙</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#container{
+			margin: 10px auto;
+			width: 600px;
+			height: 450px;
+			position: relative;
+		}
+		#img{
+			width: 600px;
+			height: 400px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: url('images/1.jpg');
+		}
+		#btn button{
+			position: absolute;
+			bottom: 10px;
+			width: 60px;
+			height: 30px;
+			font-size: 18px;
+			border-radius: 5px;
+			outline: none;
+		}
+		#btn01{
+			left: 200px;
+			background: red;
+		}
+		#btn02{
+			right: 200px;
+			background: blue;
+		}
+		
+
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="img">
+		</div>
+		<div id="btn">
+			<button id="btn01">旋转</button>
+			<button id="btn02">爆炸</button>
+		</div>
+	</div>
+	<script>
+		var oBtn01 = document.getElementById('btn01');
+		var oBtn02 = document.getElementById('btn02');
+		var oImg = document.getElementById('img');
+		var iNow = 0;//当前图片的索引
+		var bFlag = true;//判断当旋转的效果未完全完成时，不能换成下一张旋转
+		oBtn01.onclick = function(){
+			if(bFlag){
+				bFlag = !bFlag;
+				oImg.innerHTML = '';
+			iNow++;
+			oImg.style.background = 'url(images/'+(iNow)+'.jpg)';
+			if(iNow==4){//这里的判断要注意，oImg的背景显示当前张，翻转的是下一张
+				iNow=0;
+			}
+			for(var j=0;j<4;j++){
+				for(var i=0;i<6;i++){
+					var oDiv = document.createElement('div');
+					oImg.appendChild(oDiv);
+					oDiv.style.width = '100px';
+					oDiv.style.height = '100px';
+					oDiv.style.position = 'absolute';
+					oDiv.style.left = i*100+'px';
+					oDiv.style.top = j*100+'px';
+					oDiv.style.background = 'url(images/'+(iNow+1)+'.jpg) '+-i*100+'px '+-j*100+'px';
+					oDiv.style.WebkitTransition = 'all 0.5s ease';
+					oDiv.style.WebkitTransform = 'rotateY(-180deg)';//转180度图片就是反着的,为了使旋转后的图片是正的，需要先把它旋转成反的
+					oDiv.style.WebkitBackfaceVisibility = 'hidden';//小div的背面不可见
+				}
+			}
+			var aDiv = oImg.getElementsByTagName('div');
+			var index = 0;//小div的索引
+			var timer = setInterval(function(){
+				aDiv[index].style.WebkitTransform = 'rotateY(0deg)';
+				index++;
+				if(index==24){
+					aDiv[23].addEventListener('webkitTransitionEnd',function(){
+						bFlag = true;
+					},false);
+					clearInterval(timer);
+				}
+			},20);
+			}
+			
+		};
+		function imgRandom(x,y){
+			return Math.floor(Math.random()*(y-x+1)+x);
+		}
+		oBtn02.onclick = function(){
+			oImg.innerHTML = '';
+			bFlag = true;//为了旋转动画没完全完成的时候，点击了爆炸，这样旋转里的bFlag还一直是false，就无法继续旋转
+			for(var j=0;j<4;j++){
+				for(var i=0;i<6;i++){
+					var oDiv = document.createElement('div');
+					oImg.appendChild(oDiv);
+					oDiv.style.width = '100px';
+					oDiv.style.height = '100px';
+					oDiv.style.position = 'absolute';
+					oDiv.style.left = i*100+'px';
+					oDiv.style.top = j*100+'px';
+					oDiv.style.background = 'url(images/'+(iNow+1)+'.jpg) '+-i*100+'px '+-j*100+'px';
+					oDiv.style.WebkitTransition = 'all 1s ease';
+				}
+			}
+			iNow++;
+			if(iNow==4){
+				iNow=0;
+			}
+			oImg.style.background = 'url(images/'+(iNow+1)+'.jpg)';
+			var aDiv = oImg.getElementsByTagName('div');
+			var index = 0;//小div的索引
+			var timer = setInterval(function(){
+				aDiv[index].style.WebkitTransform = 'rotateY(360deg) scale(2)';
+				aDiv[index].style.left = imgRandom(-200,800)+'px';
+				aDiv[index].style.top = imgRandom(0,500)+'px';
+				aDiv[index].style.opacity = 0;
+				index++;
+				if(index==24){
+					clearInterval(timer);
+				}
+			},0);
+		};
+	</script>
+</body>
+</html>

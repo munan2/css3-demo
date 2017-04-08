@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+
+
+</body>
+
+
+<script>
+	var obj = {
+		name:'zhnagsan',
+		sex:'female',
+		brother:{
+			name:'zhnaaa',
+			sex:'male'
+		}
+	}
+	var obj1=clone(obj);
+	obj.brother.name = 'lisi';
+	function clone(obj){
+		var obj1={};
+		for(var p in obj){
+			if(typeof(obj[p])=='object'){
+				obj1[p]=clone(obj[p]);
+			}else{
+				obj1[p] = obj[p];
+			}
+		}
+		return obj1;	
+	}
+	console.log(obj1.brother.name);
+	//利用JSON.parse和JSON.stringify实现克隆
+	var str = JSON.stringify(obj);
+	var obj1 = JSON.parse(str);
+	
+</script>
+</body>
+</html>

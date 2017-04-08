@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转木马</title>
+	<style>
+		body{
+			-webkit-perspective: 800px;
+			-webkit-perspective-origin: center -40% ;
+		}
+		#container{
+			width: 100px;
+			height: 120px;/*不能忘记给container设置高，否则会塌陷*/
+			position: relative;
+			margin: 200px auto;
+			-webkit-transform-style: preserve-3d;
+			-webkit-transition: -webkit-transform 1s ease;	
+		}
+
+
+		#container img{
+			width: 100px;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#container img:nth-child(1){
+			-webkit-animation: showone 0.5s ease forwards;
+		}
+		@-webkit-keyframes showone{
+			from{
+				/*-webkit-transform: translateZ(180px);*/
+			}
+			to{
+				-webkit-transform: rotateY(40deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(2){
+			-webkit-animation: showtwo 1s ease 0.3s forwards;
+		}
+		@-webkit-keyframes showtwo{
+			from{
+				/*-webkit-transform: translateZ(160px);*/
+			}
+			to{
+				-webkit-transform: rotateY(80deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(3){
+			-webkit-animation: showthree 1s ease 0.6s forwards;
+		}
+		@-webkit-keyframes showthree{
+			from{
+				/*-webkit-transform: translateZ(140px);*/
+			}
+			to{
+				-webkit-transform: rotateY(120deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(4){
+			-webkit-animation: showfour 1s ease 0.9s forwards;
+		}
+		@-webkit-keyframes showfour{
+			from{
+				/*-webkit-transform: translateZ(120px);*/
+			}
+			to{
+				-webkit-transform: rotateY(160deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(5){
+			-webkit-animation: showfive 1s ease 1.2s forwards;
+		}
+		@-webkit-keyframes showfive{
+			from{
+			/*	-webkit-transform: translateZ(100px);*/
+			}
+			to{
+				-webkit-transform: rotateY(200deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(6){
+			-webkit-animation: showsix 1s ease 1.5s forwards;
+		}
+		@-webkit-keyframes showsix{
+			from{
+				/*-webkit-transform: translateZ(80px);*/
+			}
+			to{
+				-webkit-transform: rotateY(240deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(7){
+			-webkit-animation: showseven 1s ease 1.8s forwards;
+		}
+		@-webkit-keyframes showseven{
+			from{
+				/*-webkit-transform: translateZ(60px);*/
+			}
+			to{
+				-webkit-transform: rotateY(280deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(8){
+			-webkit-animation: showeight 1s ease 2.1s forwards;
+		}
+		@-webkit-keyframes showeight{
+			from{
+				/*-webkit-transform: translateZ(40px);*/
+			}
+			to{
+				-webkit-transform: rotateY(320deg)translateZ(300px);
+			}
+		}
+		#container img:nth-child(9){
+			-webkit-animation: showten 1s ease 2.4s forwards;
+		}
+		@-webkit-keyframes showten{
+			from{
+				/*-webkit-transform: translateZ(20px);*/
+			}
+			to{
+				-webkit-transform: translateZ(300px);
+			}
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="container">
+		<img src="imgs/1.jpg" alt="">
+		<img src="imgs/2.jpg" alt="">
+		<img src="imgs/3.jpg" alt="">
+		<img src="imgs/4.jpg" alt="">
+		<img src="imgs/5.jpg" alt="">
+		<img src="imgs/6.jpg" alt="">
+		<img src="imgs/7.jpg" alt="">
+		<img src="imgs/8.jpg" alt="">
+		<img src="imgs/9.jpg" alt="">
+
+	</div>
+	<script src='jquery-1.12.4.js'></script>
+	<script>
+		$(function(){
+			var dg = 0;
+			$('body').on('click',function(){
+				dg+=40;
+				$('#container').css('-webkit-transform','rotateY('+dg+'deg)');
+				console.log('rotateY('+dg+')deg');
+			});
+		});
+	</script>
+</body>
+</html>

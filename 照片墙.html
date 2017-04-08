@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>照片墙</title>
+	<style>
+		body{
+			-webkit-perspective: 1000px;
+		}
+		#photowall{
+			width: 1000px;
+			height: 600px;
+			-webkit-transform-style: preserve-3d;
+
+		}
+		#photowall img{
+			width: 150px;
+			height: 200px;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			float: left;
+			
+		}
+		.selected{
+			-webkit-animation: bigger 2s ease backwards;
+		}
+		@-webkit-keyframes bigger{
+			form{
+
+			}
+			to{
+				-webkit-transform: scale3d(1.2,1.2,1.2) translateX(20px) translateZ(20px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="photowall">
+		<img src="imgs/14.jpg" alt="">
+		<img src="imgs/15.jpg" alt="">
+		<img src="imgs/16.jpg" alt="">
+		<img src="imgs/17.jpg" alt="">
+		<img src="imgs/18.jpg" alt="">
+		<img src="imgs/19.jpg" alt="">
+		<img src="imgs/20.jpg" alt="">
+		<img src="imgs/21.jpg" alt="">
+		<img src="imgs/22.jpg" alt="">
+		<img src="imgs/23.jpg" alt="">
+		<img src="imgs/24.jpg" alt="">
+		<img src="imgs/25.jpg" alt="">
+	</div>
+	<script src='jquery-1.12.4.js'></script>
+	<script>
+		var oPhotowall = document.getElementById('photowall');
+		var aImg = oPhotowall.getElementsByTagName('img');
+		for(var i=0;i<aImg.length;i++){
+			aImg[i].onmouseover = function(){
+				for(var i=0; i<aImg.length;i++){
+					aImg[i].className = '';
+				}
+				this.className = 'selected';
+			};
+			
+		}
+	// $(function(){
+	// 	// var oPhotowall = document.getElementById('photowall');
+	// 	// var aImg = oPhotowall.getElementsByTagName('img');
+	// 	var $img = $('#photowall img');
+	// 	for(var i=0;i<aImg.length;i++){
+	// 		$img.eq(i).hover(function(){
+	// 			$(this).css('-webkit-transform','translateZ(100px)');
+	// 		},function(){
+
+	// 		});
+	// 	}
+
+	// });
+		
+	</script>
+</body>
+</html>

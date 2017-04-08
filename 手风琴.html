@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		img{
+			border: 0;
+		}
+		#container{
+			display: flex;
+			width: 1020px;
+			height: 400px;
+			margin: 100px auto;
+			border: 1px solid #f00;
+		}
+		#container li{
+			float: left;
+			width: 206px;
+			height: 400px;
+			overflow: hidden;
+			-webkit-transition: width 1s ease;
+		}
+		#container .pic01{
+			background: url('images/1.jpg');
+		}
+		#container .pic02{
+			background: url('images/2.jpg');
+		}
+		#container .pic03{
+			background: url('images/3.jpg');
+		}
+		#container .pic04{
+			width: 400px;
+			background: url('images/4.jpg');
+		}
+		#container li:hover{
+			width: 600px;
+		}
+		
+	</style>
+</head>
+<body>
+	<ul id="container">
+		<li class="pic01"></li>
+		<li class="pic02"></li>
+		<li class="pic03"></li>
+		<li class="pic04"></li>
+	</ul>
+</body>
+</html>

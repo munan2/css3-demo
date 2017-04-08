@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转木马精</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#stage{
+			width: 600px;
+			height: 400px;
+			margin: 100px auto;
+			position: relative;
+			-webkit-perspective: 800px;
+			-webkit-perspective-origin: 50% -50%;
+		}
+		#container{
+			width: 100px;
+			height: 200px;
+			margin: 100px auto;
+			-webkit-transform-style: preserve-3d;
+			-webkit-transition: -webkit-transform 1s ease;
+		}
+		#container img{
+			width: 100px;
+			position: absolute;
+			-webkit-transition: -webkit-transform 1s ease;
+
+		}
+	</style>
+</head>
+<body>
+	<div id="stage">
+		<div id="container">
+			<!-- <img src="imgs/1.jpg" alt="">
+			<img src="imgs/2.jpg" alt="">
+			<img src="imgs/3.jpg" alt="">
+			<img src="imgs/4.jpg" alt="">
+			<img src="imgs/5.jpg" alt="">
+			<img src="imgs/6.jpg" alt="">
+			<img src="imgs/7.jpg" alt="">
+			<img src="imgs/8.jpg" alt="">
+			<img src="imgs/9.jpg" alt=""> -->
+		</div>
+	</div>
+	
+	<script>
+		var oContainer = document.getElementById('container');
+		var aImg = document.getElementsByTagName('img');
+		// var idisY = aImg[0].offsetWidth/2/Math.tan(360/(aImg.length)/2*Math.PI/180);
+		var t=0;
+		// for(var i=0;i<aImg.length;i++){
+		// 	aImg[i].style.WebkitTransform = "rotateY("+(-40*i)+"deg)translateZ("+(idisY+40)+"px)";
+		// 	aImg[aImg.length-i-1].style.WebkitTransition = "-webkit-transform 1s ease "+t+"s";
+		// 	t=t+0.2;  // 方法1延时
+		// }
+			//  var i=8;
+			//  var timer = setInterval(function(){
+			//  	aImg[i].style.WebkitTransform = "rotateY("+(-40*i)+"deg)translateZ("+(idisY+40)+"px)";
+			//  	i--;
+			//  	if(i==-1){
+			//  	clearInterval(timer);//方法2定时器，缺点还需要清除定时器
+			// 	}
+			// },100);
+			// for(var i=0;i<aImg.length;i++){
+			// 	(function(index){
+			// 		setTimeout(function(){
+			// 			aImg[index].style.WebkitTransform = "rotateY("+(-40*index)+"deg)translateZ("+(idisY+40)+"px)";
+			// 		},100*(9-i)); 
+			// 	})(i);
+			// } //方法3  采用timeout可以不用清除定时器，这里用到了闭包 (function(){})() 因为无法取到i的值
+
+
+			//再一次改进，考虑到如果图片很多而且部分图片很大无法一次性加载完图片时，可以在html结构里先不写img，通过js一个个插入图片.
+			var aa=0;//aa为了确定加入的图片是否加载了，如果加载出来了，aa在onload里++
+			for(var i=0;i<9;i++){
+				var oImg = new Image();
+				oImg.onload = function(){
+					aa++;
+					if(aa==9){//代表所有图片都加载完
+						for(var i=0;i<aImg.length;i++){
+					 		(function(index){
+					 		setTimeout(function(){
+					 			aImg[index].style.WebkitTransform = "rotateY("+(-40*index)+"deg)translateZ("+(idisY+40)+"px)";
+								},100*(9-i)); 
+					 		})(i);
+				 		}
+			 		}
+				};
+				oImg.src= 'imgs/'+(i+1)+'.jpg';//这句话放在这而不是放在79行也是因为防止出现图片未加载完
+				oContainer.appendChild(oImg);//将每个对象插入oContainer里
+			}
+			var idisY = aImg[0].offsetWidth/2/Math.tan(360/(aImg.length)/2*Math.PI/180);
+			var index=0;
+			oContainer.onclick = function(){
+				index++;
+				this.style.WebkitTransform = "rotateY("+(-40*index)+"deg)";
+			};
+	</script>
+</body>
+</html>

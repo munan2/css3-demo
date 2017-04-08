@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个性化旋转按钮</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#container{
+			width: 42px;
+			height: 42px;
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+		}
+		#buttons{
+			width: 42px;
+			height: 42px;
+		}
+		#buttons img{
+			width: 42px;
+			height: 42px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			-webkit-transition: -webkit-transform 1s ease;
+		}
+		
+		#home{
+			width: 49px;
+			height: 49px;
+			position: absolute;
+			left: 0;
+			top: 0;	
+			-webkit-transition: -webkit-transform 1s ease;
+		}
+		
+		#home img{
+			width: 49px;
+			height: 49px;
+			
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		
+		<div id="buttons">
+			<img src="img/close.png" alt="">
+			<img src="img/full.png" alt="">
+			<img src="img/open.png" alt="">
+			<img src="img/prev.png" alt="">
+			<img src="img/refresh.png" alt="">
+		</div>
+		<div id="home">
+			<img src="img/home.png" alt="">
+		</div>
+		
+		
+	</div>
+	<script>
+		var oContainer = document.getElementById('container');
+		var oHome = document.getElementById('home');
+		var oButtons = document.getElementById('buttons');
+		var aImg = oButtons.getElementsByTagName('img');
+		var bClick = true;
+		var bBclick = true;
+		oHome.onclick = function(){
+			if(bClick){
+				this.style.WebkitTransform = "rotate(-360deg)";
+				for(var i=0;i<aImg.length;i++){
+					(function(index){
+						setTimeout(function(){
+							var x=-150*Math.sin(22.5*index*Math.PI/180);
+							var y=-150*Math.cos(22.5*index*Math.PI/180);
+							aImg[index].style.WebkitTransform = "translate("+x+"px,"+y+"px) rotate(-360deg)";
+						},50*index);
+					})(i);
+				}
+			}else{
+				this.style.WebkitTransform = "rotate(0deg)";
+				for(var i=0;i<aImg.length;i++){
+					(function(index){
+						setTimeout(function(){
+							aImg[index].style.WebkitTransform = "translate(0,0) rotate(0deg)";
+						},50*(4-index));
+					})(i);
+				}
+			}
+			bClick=!bClick;
+		};
+		for(var i=0;i<aImg.length;i++){
+			aImg[i].onclick = function(){
+				var iDistrans = this.style.WebkitTransform;
+				this.style.WebkitTransitionDuration = '0.3s';
+				this.style.WebkitTransform = iDistrans + ' scale(1.5)';
+				this.style.opacity = 0.3;
+				function fn(){
+					this.style.opacity = 1;
+					this.style.WebkitTransform = iDistrans + ' scale(1)';
+					this.removeEventListener('webkitTransitionEnd',fn);
+				}
+				this.addEventListener('webkitTransitionEnd',fn,false);
+			};
+		}
+	
+		
+	</script>
+</body>
+</html>

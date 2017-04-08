@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个性化按钮新</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#container{
+			width: 42px;
+			height: 42px;
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+		}
+		#buttons{
+			width: 42px;
+			height: 42px;
+		}
+		#buttons img{
+			width: 42px;
+			height: 42px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			-webkit-transition: -webkit-transform 0.5s ease;
+		}
+		#home{
+			width: 49px;
+			height: 49px;
+			position: absolute;
+			left: 0;
+			top: 0;	
+			-webkit-transition: -webkit-transform 0.5s ease;
+		}
+		#home img{
+			width: 49px;
+			height: 49px;	
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="buttons">
+			<img src="img/close.png" alt="">
+			<img src="img/full.png" alt="">
+			<img src="img/open.png" alt="">
+			<img src="img/prev.png" alt="">
+			<img src="img/refresh.png" alt="">
+		</div>
+		<div id="home">
+			<img src="img/home.png" alt="">
+		</div>
+	</div>
+	<script>
+		var oContainer = document.getElementById('container');
+		var oButtons = document.getElementById('buttons');
+		var aImg = oButtons.getElementsByTagName('img');
+		var oHome = document.getElementById('home');
+		var bClickhome = true;
+		oHome.onclick = function(){
+			if(bClickhome){
+				this.style.WebkitTransform = 'rotate(-360deg)';
+				for(var i=0;i<aImg.length;i++){
+					var x = -150*Math.sin(i*(90/(aImg.length-1))*Math.PI/180); 
+					var y = -150*Math.cos(i*(90/(aImg.length-1))*Math.PI/180);
+					aImg[i].style.WebkitTransitionDelay = i*0.1+'s'; 				
+					aImg[i].style.WebkitTransitionDuration = '0.5s';	
+					aImg[i].style.WebkitTransform = 'translate('+x+'px,'+y+'px) rotate(-360deg)';
+				}
+			}else{
+				this.style.WebkitTransform = 'rotate(0deg)';
+				for(var i=0;i<aImg.length;i++){
+					var x = -150*Math.sin(i*(90/(aImg.length-1))*Math.PI/180); 
+					var y = -150*Math.cos(i*(90/(aImg.length-1))*Math.PI/180);
+					aImg[i].style.WebkitTransitionDuration = '0.5s';
+					aImg[i].style.WebkitTransitionDelay = (aImg.length-i-1)*0.1+'s';
+					aImg[i].style.WebkitTransform = 'translate(0,0) rotate(0deg)';
+				}
+				
+			}
+			bClickhome = !bClickhome;	
+		}
+		for(var i=0;i<aImg.length;i++){
+			aImg[i].onclick = function(){
+				var iDis = this.style.WebkitTransform;
+				this.style.WebkitTransitionDuration = '0.3s';
+				this.style.WebkitTransform = iDis+' scale(1.2)';
+				this.style.opacity = 0.3;
+				function fn(){
+					this.style.opacity = 1;
+					this.style.WebkitTransform = iDis+' scale(1)';
+					this.removeEventListener('webkitTransitionEnd',fn,false);
+				}
+				this.addEventListener('webkitTransitionEnd',fn,false);
+			};
+		}
+	</script>
+		
+	
+</body>
+</html>

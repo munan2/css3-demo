@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自适应练习</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html{
+			height: 100%;
+		}
+		body{
+			display: -webkit-flex;
+			-webkit-flex-direction: column;
+			height: 100%;
+		}
+		#header{
+			height: 50px;
+			background: red;
+		}
+		#content{
+			background: green;
+			-webkit-flex-grow: 1;
+		}
+		#footer{
+			height: 50px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">header</div>
+	<div id="content">content</div>
+	<div id="footer">footer</div>
+</body>
+</html>
